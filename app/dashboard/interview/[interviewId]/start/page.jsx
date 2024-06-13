@@ -7,6 +7,7 @@ import QuestionsSection from './_components/QuestionsSection';
 import RecordAnswerSection from './_components/RecordAnswerSection';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { json } from 'drizzle-orm/mysql-core';
 
 function StartInterview({params}) {
 
@@ -23,7 +24,8 @@ function StartInterview({params}) {
     const GetInterviewDetails=async()=>{
         const result=await db.select().from(MockInterview)
         .where(eq(MockInterview.mockId,params.interviewId))
-
+        
+        //  const jsonMockResp=JSON.parse(result[0].jsonMockResp);
         const jsonMockResp=JSON.parse(result[0].jsonMockResp);
         console.log(jsonMockResp)
         setMockInterviewQuestion(jsonMockResp);
